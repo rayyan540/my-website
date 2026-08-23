@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class 9 Dynamic Website</title>
+  <style>
+    /* basic Styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Dark Mode Theme */
+    body.dark-mode {
+      background-color: #1e1e2e;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    body.dark-mode .container {
+      background: #2b2b3d;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+
+    .card {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #357abd;
+    }
+
+    input {
+      padding: 8px;
+      width: 70%;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Class 9 Student Portal</h1>
+    <p id="clock">Loading time...</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Dynamic Feature 1: Theme Switcher -->
+    <div class="card">
+      <h3>1. Appearance Settings</h3>
+      <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </div>
+
+    <!-- Dynamic Feature 2: Interactive Greeting -->
+    <div class="card">
+      <h3>2. Student Greeting</h3>
+      <input type="text" id="username" placeholder="Enter your name">
+      <button onclick="greetUser()">Submit</button>
+      <p id="greetingText"></p>
+    </div>
+
+    <!-- Dynamic Feature 3: Interactive Counter -->
+    <div class="card">
+      <h3>3. Attendance Counter</h3>
+      <p>Present Days: <span id="counter">0</span></p>
+      <button onclick="changeCounter(1)">Add Day (+1)</button>
+      <button onclick="changeCounter(-1)">Remove Day (-1)</button>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. Live Clock Function
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText = "Current Time: " + now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000); // Updates every second
+    updateClock();
+
+    // 2. Dark Mode Toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // 3. Greeting Function
+    function greetUser() {
+      const name = document.getElementById("username").value;
+      const greetingElement = document.getElementById("greetingText");
+      
+      if (name.trim() === "") {
+        greetingElement.innerText = "Please enter a valid name!";
+        greetingElement.style.color = "red";
+      } else {
+        greetingElement.innerText = "Welcome back, " + name + "! Ready to learn today?";
+        greetingElement.style.color = "green";
+      }
+    }
+
+    // 4. Counter Logic
+    let count = 0;
+    function changeCounter(value) {
+      count += value;
+      if (count < 0) count = 0; // Prevent negative values
+      document.getElementById("counter").innerText = count;
+    }
+  </script>
+
+</body>
+</html>
